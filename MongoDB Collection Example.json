@@ -1,0 +1,149 @@
+MongoDB Collection Example
+Collection: systems
+Each system, along with its components, subcomponents, and inventory parts, can be stored as a single document. Here's how it can be structured:
+
+json
+Copiar código
+{
+  "_id": ObjectId("system_id_1"),
+  "name": "Propulsion System",
+  "components": [
+    {
+      "name": "Main Engine",
+      "subcomponents": [
+        {
+          "name": "Cylinder Head",
+          "subcomponents": [
+            {
+              "name": "Exhaust Valves",
+              "inventory_parts": [
+                { "name": "Spare Exhaust Valves", "quantity": 10 },
+                { "name": "Valve Springs", "quantity": 20 },
+                { "name": "Valve Seats", "quantity": 5 },
+                { "name": "Valve Guides", "quantity": 8 }
+              ]
+            },
+            {
+              "name": "Intake Valves",
+              "inventory_parts": [
+                { "name": "Spare Intake Valves", "quantity": 12 },
+                { "name": "Valve Springs", "quantity": 15 },
+                { "name": "Valve Guides", "quantity": 10 },
+                { "name": "Seals and Gaskets", "quantity": 5 }
+              ]
+            },
+            {
+              "name": "Fuel Injectors",
+              "inventory_parts": [
+                { "name": "Spare Fuel Injectors", "quantity": 8 },
+                { "name": "Injector Seals", "quantity": 10 },
+                { "name": "Injector Nozzles", "quantity": 12 }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Crankshaft",
+          "subcomponents": [
+            {
+              "name": "Main Bearings",
+              "inventory_parts": [
+                { "name": "Main Bearings", "quantity": 6 },
+                { "name": "Bearing Shells", "quantity": 4 }
+              ]
+            },
+            {
+              "name": "Connecting Rods",
+              "inventory_parts": [
+                { "name": "Connecting Rods", "quantity": 10 },
+                { "name": "Bolts and Nuts", "quantity": 30 },
+                { "name": "Bearings", "quantity": 12 }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Turbocharger",
+          "subcomponents": [
+            {
+              "name": "Turbine",
+              "inventory_parts": [
+                { "name": "Turbine Blades", "quantity": 4 },
+                { "name": "Shaft Seals", "quantity": 8 },
+                { "name": "Gaskets", "quantity": 5 }
+              ]
+            },
+            {
+              "name": "Compressor",
+              "inventory_parts": [
+                { "name": "Compressor Blades", "quantity": 6 },
+                { "name": "Bearings", "quantity": 8 },
+                { "name": "Seals", "quantity": 10 }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Gearbox",
+      "subcomponents": [
+        {
+          "name": "Reduction Gears",
+          "inventory_parts": [
+            { "name": "Gear Teeth", "quantity": 8 },
+            { "name": "Bearings", "quantity": 12 },
+            { "name": "Lubrication Filters", "quantity": 15 }
+          ]
+        },
+        {
+          "name": "Thrust Bearings",
+          "inventory_parts": [
+            { "name": "Thrust Bearings", "quantity": 6 },
+            { "name": "Seals", "quantity": 10 }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Shaft Line",
+      "subcomponents": [
+        {
+          "name": "Propeller Shaft",
+          "inventory_parts": [
+            { "name": "Shaft Couplings", "quantity": 10 },
+            { "name": "Shaft Seals", "quantity": 8 }
+          ]
+        },
+        {
+          "name": "Stern Tube",
+          "inventory_parts": [
+            { "name": "Stern Tube Seals", "quantity": 5 },
+            { "name": "Lubricants", "quantity": 20 }
+          ]
+        }
+      ]
+    }
+  ]
+}
+Collection: ships
+Each ship can have its own document, storing general ship information and referencing the system components.
+
+json
+Copiar código
+{
+  "_id": ObjectId("ship_id_1"),
+  "name": "Ship A",
+  "imo_number": "IMO1234567",
+  "built_year": 2010,
+  "systems": [
+    {
+      "system_id": ObjectId("system_id_1"),
+      "system_name": "Propulsion System"
+    },
+    {
+      "system_id": ObjectId("system_id_2"),
+      "system_name": "Auxiliary Systems"
+    }
+  ]
+}
